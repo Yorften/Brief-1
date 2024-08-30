@@ -3,15 +3,19 @@ package src.business;
 import java.time.LocalDate;
 
 abstract public class Document {
-    private int id;
-    private String name;
+    private static int id = 1;
+    private String title;
     private String author;
     private LocalDate publicationDate;
     private int pageNumbers;
+    private boolean isBorrowed = false;
 
-    public Document(int id, String name, String author, LocalDate publicationDate, int pageNumbers) {
-        this.id = id;
-        this.name = name;
+    public Document() {
+
+    }
+
+    public Document(String title, String author, LocalDate publicationDate, int pageNumbers) {
+        this.title = title;
         this.author = author;
         this.publicationDate = publicationDate;
         this.pageNumbers = pageNumbers;
@@ -26,19 +30,15 @@ abstract public class Document {
     // --------------- Getters / Setters -----------------------
 
     public int getId() {
-        return this.id;
+        return Document.id;
     }
 
-    public void setId(int value) {
-        this.id = value;
+    public String getTitle() {
+        return this.title;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String value) {
-        this.name = value;
+    public void setTitle(String value) {
+        this.title = value;
     }
 
     public String getAuthor() {
@@ -63,5 +63,13 @@ abstract public class Document {
 
     public void setPageNumbers(int value) {
         this.pageNumbers = value;
+    }
+
+    public boolean getIsBorrowed() {
+        return this.isBorrowed;
+    }
+
+    public void setIsBorrowed(boolean value) {
+        this.isBorrowed = value;
     }
 }

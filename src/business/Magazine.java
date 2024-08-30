@@ -5,26 +5,33 @@ import java.time.LocalDate;
 public class Magazine extends Document {
     private int isbn;
 
-    public Magazine(int id, String name, String author, LocalDate publicationDate, int pageNumbers, int isbn) {
-        super(id, name, author, publicationDate, pageNumbers);
+    public Magazine() {
+    }
+
+    public Magazine(String name, String author, LocalDate publicationDate, int pageNumbers, int isbn) {
+        super(name, author, publicationDate, pageNumbers);
         this.isbn = isbn;
     }
 
     @Override
     void borrowDoc() {
-        // TODO Auto-generated method stub
-
+        this.setIsBorrowed(true);
     }
 
     @Override
     void returnDoc() {
-        // TODO Auto-generated method stub
-
+        this.setIsBorrowed(false);
     }
 
     @Override
     void showDetails() {
-        // TODO Auto-generated method stub
+        System.out.println("Magazine Details:");
+        System.out.println("ID: " + getId());
+        System.out.println("Title: " + getTitle());
+        System.out.println("Author: " + getAuthor());
+        System.out.println("Publication Date: " + getPublicationDate());
+        System.out.println("Number of Pages: " + getPageNumbers());
+        System.out.println("ISBN: " + this.isbn);
 
     }
 

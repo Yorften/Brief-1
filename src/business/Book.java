@@ -1,29 +1,38 @@
 package src.business;
+
 import java.time.LocalDate;
 
 public class Book extends Document {
+
     private int number;
 
-    public Book(int id, String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
-        super(id, name, author, publicationDate, pageNumbers);
+    public Book() {
+    }
+
+    public Book(String name, String author, LocalDate publicationDate, int pageNumbers, int number) {
+        super(name, author, publicationDate, pageNumbers);
         this.number = number;
     }
 
     @Override
     void borrowDoc() {
-        // TODO Auto-generated method stub
-
+        this.setIsBorrowed(true);
     }
 
     @Override
     void returnDoc() {
-        // TODO Auto-generated method stub
-
+        this.setIsBorrowed(false);
     }
 
     @Override
     void showDetails() {
-        // TODO Auto-generated method stub
+        System.out.println("\n Book Details:");
+        System.out.println("\n ID: " + getId());
+        System.out.println("\n Title: " + getTitle());
+        System.out.println("\n Author: " + getAuthor());
+        System.out.println("\n Publication Date: " + getPublicationDate());
+        System.out.println("\n Number of Pages: " + getPageNumbers());
+        System.out.println("\n Book Number: " + this.number);
 
     }
 
