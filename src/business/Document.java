@@ -3,7 +3,8 @@ package src.business;
 import java.time.LocalDate;
 
 abstract public class Document {
-    private static int id = 1;
+    private static int nextId = 1;
+    private int id;
     private String title;
     private String author;
     private LocalDate publicationDate;
@@ -11,10 +12,11 @@ abstract public class Document {
     private boolean isBorrowed = false;
 
     public Document() {
-
+        this.id = nextId++;
     }
 
     public Document(String title, String author, LocalDate publicationDate, int pageNumbers) {
+        this.id = nextId++;
         this.title = title;
         this.author = author;
         this.publicationDate = publicationDate;
@@ -30,7 +32,11 @@ abstract public class Document {
     // --------------- Getters / Setters -----------------------
 
     public int getId() {
-        return Document.id;
+        return this.id;
+    }
+
+    public void setId(int value) {
+        this.id = value;
     }
 
     public String getTitle() {

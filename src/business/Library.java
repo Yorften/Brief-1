@@ -18,7 +18,6 @@ public class Library {
         documents.add(doc); // Add to list
         documentMap.put(doc.getTitle(), doc); // Add to map with title as key
         System.out.println("Document added successfully!");
-        
     }
 
     public void borrowDocument() {
