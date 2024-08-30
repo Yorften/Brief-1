@@ -1,0 +1,59 @@
+package src.business;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+
+public class Library {
+    private ArrayList<Document> documents;
+    private Map<String, Document> documentMap;
+
+    public Library() {
+        this.documents = new ArrayList<>();
+        this.documentMap = new HashMap<>();
+    }
+
+    public void addDocument() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void borrowDocument() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void returnDocument() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void listDocuments() {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void findDocuments() {
+        // TODO Auto-generated method stub
+
+    }
+
+    // --------------- Getters / Setters -----------------------
+
+    public List<Document> getDocuments() {
+        return this.documents;
+    }
+
+    public void setDocuments(ArrayList<Document> value) {
+        this.documents = value;
+    }
+
+    public Map<String, Document> getDocumentMap() {
+        return this.documentMap;
+    }
+
+    public void setDocument(Map<String, Document> value) {
+        this.documentMap = value;
+    }
+}
