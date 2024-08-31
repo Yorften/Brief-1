@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import src.business.Book;
 import src.business.Document;
@@ -150,15 +153,67 @@ public class ConsoleUI {
     }
 
     private void borrowDocumentUI() {
-        listDocumentsUI(Filter.AVAILABLE);
+        in.useDelimiter(System.lineSeparator());
+        List<Document> filteredDocuments = listDocumentsUI(Filter.AVAILABLE);
 
+        if (filteredDocuments.isEmpty()) {
+            System.out.println("No available documents to borrow.");
+            return; // Exit if no documents are available
+        }
+
+        int[] documentIds = filteredDocuments.stream()
+                .mapToInt(Document::getId)
+                .toArray();
+
+        System.out.println(Arrays.toString(documentIds));
+
+        do {
+            System.out.print("Choose a document to borrow: ");
+            try {
+                input = in.nextInt();
+                if (!Arrays.stream(documentIds).anyMatch(id -> id == input)) {
+                    System.out.print("Please pick a valid Id...");
+                    in.next();
+                }
+            } catch (Exception e) {
+                System.out.print("Please pick a valid number...");
+                in.next();
+                in.next();
+            }
+        } while (!Arrays.stream(documentIds).anyMatch(id -> id == input));
+
+        // Get the selected doc by its id
+        Document selectedDoc = filteredDocuments.stream().filter(doc -> doc.getId() == input).findFirst().get();
+        lib.borrowDocument(selectedDoc);
+        System.out.print("Document been borrowed successfully ");
+        in.next();
     }
 
     private void returnDocumentUI() {
-        listDocumentsUI(Filter.BORROWED);
+        List<Document> filteredDocuments = listDocumentsUI(Filter.BORROWED);
+        int[] documentIds = filteredDocuments.stream()
+                .mapToInt(Document::getId)
+                .toArray();
+
+        do {
+            System.out.print("Choose a document to borrow: ");
+            try {
+                input = in.nextInt();
+                if (Arrays.stream(documentIds).anyMatch(id -> id == input)) {
+                    System.out.print("Please pick a valid Id...");
+                    in.next();
+                }
+            } catch (Exception e) {
+                System.out.print("Please pick a valid number...");
+                in.next();
+                in.next();
+            }
+        } while (Arrays.stream(documentIds).anyMatch(id -> id == input));
+        System.out.print("Document been borrowed successfully ");
+        in.next();
     }
 
-    public void listDocumentsUI(Filter filter) {
+    public List<Document> listDocumentsUI(Filter filter) {
         List<Document> filteredDocuments = new ArrayList<>();
 
         switch (filter) {
@@ -194,6 +249,8 @@ public class ConsoleUI {
             System.out.println(
                     "+--------------------------------------------------------------------------------------+");
         }
+
+        return filteredDocuments;
     }
 
     private void findDocumentUI() {

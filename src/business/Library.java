@@ -24,14 +24,12 @@ public class Library {
         System.out.println("Document added successfully!");
     }
 
-    public void borrowDocument() {
-        // TODO Auto-generated method stub
-
+    public void borrowDocument(Document doc) {
+        doc.borrowDoc();
     }
 
-    public void returnDocument() {
-        // TODO Auto-generated method stub
-
+    public void returnDocument(Document doc) {
+        doc.returnDoc();
     }
 
     public void seedLibrary() {
