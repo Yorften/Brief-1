@@ -3,6 +3,7 @@ package src.business;
 import java.time.LocalDate;
 
 public class Magazine extends Document {
+
     private int isbn;
 
     public Magazine() {

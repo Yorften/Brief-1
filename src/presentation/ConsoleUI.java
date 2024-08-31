@@ -3,6 +3,7 @@ package src.presentation;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ import src.business.Book;
 import src.business.Document;
 import src.business.Library;
 import src.business.Magazine;
+import src.utils.Filter;
 
 public class ConsoleUI {
 
@@ -19,6 +21,7 @@ public class ConsoleUI {
 
     public ConsoleUI() {
         this.lib = new Library();
+        lib.seedLibrary();
     }
 
     // ------------ Menu loop --------------
@@ -77,7 +80,7 @@ public class ConsoleUI {
                 returnDocumentUI();
                 break;
             case 4:
-                listDocumentsUI();
+                listDocumentsUI(Filter.ALL);
                 System.out.print("Press Enter key to continue...");
                 in.next();
                 break;
@@ -147,22 +150,44 @@ public class ConsoleUI {
     }
 
     private void borrowDocumentUI() {
-        listDocumentsUI();
+        listDocumentsUI(Filter.AVAILABLE);
 
     }
 
     private void returnDocumentUI() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addDocumentUI'");
+        listDocumentsUI(Filter.BORROWED);
     }
 
-    public void listDocumentsUI() {
-        List<Document> documents = lib.getDocuments();
+    public void listDocumentsUI(Filter filter) {
+        List<Document> filteredDocuments = new ArrayList<>();
+
+        switch (filter) {
+            case ALL:
+                filteredDocuments.addAll(lib.getDocuments());
+                break;
+            case AVAILABLE:
+                for (Document doc : lib.getDocuments()) {
+                    if (!doc.getIsBorrowed()) { // Check if the document is not borrowed
+                        filteredDocuments.add(doc);
+                    }
+                }
+                break;
+            case BORROWED:
+                for (Document doc : lib.getDocuments()) {
+                    if (doc.getIsBorrowed()) { // Check if the document is borrowed
+                        filteredDocuments.add(doc);
+                    }
+                }
+                break;
+            default:
+                break;
+
+        }
 
         System.out.println("+--------------------------------------------------------------------------------------+");
         System.out.println("| Id |        Title        |         Author        |        Published        |  Pages  |");
         System.out.println("+--------------------------------------------------------------------------------------+");
-        for (Document document : documents) {
+        for (Document document : filteredDocuments) {
             System.out.printf("| %-3d| %-20s| %-22s| %-24s| %-8d|%n", document.getId(), document.getTitle(),
                     document.getAuthor(),
                     document.getPublicationDate(), document.getPageNumbers());
