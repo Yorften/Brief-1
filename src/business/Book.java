@@ -15,25 +15,24 @@ public class Book extends Document {
     }
 
     @Override
-    void borrowDoc() {
+    public void borrowDoc() {
         this.setIsBorrowed(true);
     }
 
     @Override
-    void returnDoc() {
+    public void returnDoc() {
         this.setIsBorrowed(false);
     }
 
     @Override
-    void showDetails() {
+    public void showDetails() {
         System.out.println("\n Book Details:");
-        System.out.println("\n ID: " + getId());
-        System.out.println("\n Title: " + getTitle());
-        System.out.println("\n Author: " + getAuthor());
-        System.out.println("\n Publication Date: " + getPublicationDate());
-        System.out.println("\n Number of Pages: " + getPageNumbers());
-        System.out.println("\n Book Number: " + this.number);
-
+        System.out.println("\n\t ID: " + getId());
+        System.out.println("\n\t Title: " + getTitle());
+        System.out.println("\n\t Author: " + getAuthor());
+        System.out.println("\n\t Publication Date: " + getPublicationDate());
+        System.out.println("\n\t Number of Pages: " + getPageNumbers());
+        System.out.println("\n\t Book Number: " + this.number);
     }
 
     // --------------- Getters / Setters -----------------------

@@ -6,9 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 import src.business.Book;
 import src.business.Document;
@@ -258,8 +257,22 @@ public class ConsoleUI {
     }
 
     private void findDocumentUI() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addDocumentUI'");
+
+        Map<String, Document> documents = lib.getDocumentMap();
+        in.useDelimiter(System.lineSeparator());
+
+        System.out.print("Enter the title of the document: ");
+        String input = in.next();
+
+        Document document = documents.get(input);
+
+        if(document != null){
+            document.showDetails();
+            in.next();
+        }else{
+            System.out.print("No such document in our library...");
+            in.next();
+        }
     }
 
     public int showDetailsUI() {

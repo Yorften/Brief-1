@@ -15,24 +15,24 @@ public class Magazine extends Document {
     }
 
     @Override
-    void borrowDoc() {
+    public void borrowDoc() {
         this.setIsBorrowed(true);
     }
 
     @Override
-    void returnDoc() {
+    public void returnDoc() {
         this.setIsBorrowed(false);
     }
 
     @Override
-    void showDetails() {
-        System.out.println("Magazine Details:");
-        System.out.println("ID: " + getId());
-        System.out.println("Title: " + getTitle());
-        System.out.println("Author: " + getAuthor());
-        System.out.println("Publication Date: " + getPublicationDate());
-        System.out.println("Number of Pages: " + getPageNumbers());
-        System.out.println("ISBN: " + this.isbn);
+    public void showDetails() {
+        System.out.println("\n Magazine Details:");
+        System.out.println("\n\t ID: " + getId());
+        System.out.println("\n\t Title: " + getTitle());
+        System.out.println("\n\t Author: " + getAuthor());
+        System.out.println("\n\t Publication Date: " + getPublicationDate());
+        System.out.println("\n\t Number of Pages: " + getPageNumbers());
+        System.out.println("\n\t ISBN: " + this.isbn);
 
     }
 

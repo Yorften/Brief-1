@@ -15,7 +15,6 @@ public class Library {
     public Library() {
         this.documents = new ArrayList<>();
         this.documentMap = new HashMap<>();
-
     }
 
     public void addDocument(Document doc) {
