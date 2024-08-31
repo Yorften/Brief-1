@@ -199,7 +199,7 @@ public class ConsoleUI {
             System.out.print("Choose a document to borrow: ");
             try {
                 input = in.nextInt();
-                if (Arrays.stream(documentIds).anyMatch(id -> id == input)) {
+                if (!Arrays.stream(documentIds).anyMatch(id -> id == input)) {
                     System.out.print("Please pick a valid Id...");
                     in.next();
                 }
@@ -208,8 +208,12 @@ public class ConsoleUI {
                 in.next();
                 in.next();
             }
-        } while (Arrays.stream(documentIds).anyMatch(id -> id == input));
-        System.out.print("Document been borrowed successfully ");
+        } while (!Arrays.stream(documentIds).anyMatch(id -> id == input));
+
+        // Get the selected doc by its id
+        Document selectedDoc = filteredDocuments.stream().filter(doc -> doc.getId() == input).findFirst().get();
+        lib.borrowDocument(selectedDoc);
+        System.out.print("Document been returned successfully ");
         in.next();
     }
 
