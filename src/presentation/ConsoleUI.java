@@ -1,7 +1,6 @@
 package src.presentation;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +12,7 @@ import src.business.Book;
 import src.business.Document;
 import src.business.Library;
 import src.business.Magazine;
+import src.utils.DateUtils;
 import src.utils.Filter;
 
 public class ConsoleUI {
@@ -128,9 +128,12 @@ public class ConsoleUI {
                 String dateString = in.next();
 
                 // Parse and check if the date is valid (pattern)
-                publicationDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                publicationDate = DateUtils.parseDate(dateString);
             } catch (DateTimeParseException e) {
                 System.out.print("Invalid date format. Please enter the date in the format dd-MM-yyyy...");
+                in.next();
+            } catch (Exception e) {
+                System.out.print(e.getMessage());
                 in.next();
             }
         }
@@ -195,7 +198,7 @@ public class ConsoleUI {
                 .toArray();
 
         do {
-            System.out.print("Choose a document to borrow: ");
+            System.out.print("Choose a document to return: ");
             try {
                 input = in.nextInt();
                 if (!Arrays.stream(documentIds).anyMatch(id -> id == input)) {
@@ -266,10 +269,10 @@ public class ConsoleUI {
 
         Document document = documents.get(input);
 
-        if(document != null){
+        if (document != null) {
             document.showDetails();
             in.next();
-        }else{
+        } else {
             System.out.print("No such document in our library...");
             in.next();
         }
