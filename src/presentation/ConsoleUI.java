@@ -167,8 +167,6 @@ public class ConsoleUI {
                 .mapToInt(Document::getId)
                 .toArray();
 
-        System.out.println(Arrays.toString(documentIds));
-
         do {
             System.out.print("Choose a document to borrow: ");
             try {
