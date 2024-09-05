@@ -22,7 +22,7 @@ A simple Java application for managing a collection of books and magazines in a 
 
    ```sh
    git clone https://github.com/Yorften/Brief-1.git
-   cd library-management-system
+   cd Brief-1
 
 2. **Run the command:**
    ```
